@@ -1,3 +1,5 @@
+@import '../../styles/colors.css';
+
 .homeDesign {
     min-height: 100%;
     min-width: 100%;
@@ -20,7 +22,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    border: solid #533184 0.2em;
+    border: solid var(--darkPurple) 0.2em;
     border-radius: 10px;
     padding: 2em;
     margin: 2em;
