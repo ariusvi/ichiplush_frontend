@@ -1,1 +1,80 @@
 @import '../../styles/colors.css';
+
+@font-face {
+    font-family: 'CandyBeans';
+    src: url('../../assets/fonts/CandyBeans.otf') format('woff2'),
+         url('../../assets/fonts/CandyBeans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.loginDesign {
+    min-height: 90vh;
+    min-width: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../assets/images/SVG/estrellas.svg");
+
+    background-size: cover;
+}
+
+.loginDesign img {
+    max-width: 100%;
+    height: auto;
+}
+
+.loginTitle{
+    font-family: 'CandyBeans', sans-serif;
+    color: var(--lightPink);
+    font-size: 3em;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+.loginCenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    border: solid var(--darkPurple) 0.2em;
+    border-radius: 10px;
+
+    margin: 2em;
+
+    max-width: 100%;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+.loginButton{
+    width: 10em;
+    max-width: 100%;
+    height: auto;
+
+    transition: 0.2s;
+}
+
+.loginButton:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: 0.2s;
+
+}

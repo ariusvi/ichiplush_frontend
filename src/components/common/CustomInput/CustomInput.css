@@ -1,0 +1,15 @@
+.inputDesign{
+    height: 3em;
+    width: 18em;
+
+    border-radius: 0.5em;
+    border: solid var(--darkPurple) 0.1em;
+    background-color: lightgray;
+    margin: 1em;
+
+    cursor:text;
+}
+
+.inoutDesignError{
+    border: 0.2em solid var(--red);
+}

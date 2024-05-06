@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.28 121.04">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .01em;
+      }
+
+      .cls-2 {
+        letter-spacing: .02em;
+      }
+
+      .cls-3 {
+        fill: #8e0f6e;
+      }
+
+      .cls-4 {
+        letter-spacing: .03em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-6 {
+        fill: #660b3d;
+        stroke: #660b3d;
+        stroke-width: .5px;
+      }
+
+      .cls-6, .cls-7 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-8 {
+        fill: #fff;
+        font-family: CandyBeans, 'Candy Beans';
+        font-size: 28px;
+      }
+
+      .cls-9 {
+        letter-spacing: .01em;
+      }
+
+      .cls-10 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-7 {
+        fill: #62c754;
+        stroke: #339055;
+      }
+
+      .cls-11 {
+        fill: #ff53b2;
+      }
+
+      .cls-12 {
+        fill: #b21b82;
+      }
+
+      .cls-13 {
+        fill: #c72988;
+      }
+    </style>
+  </defs>
+  <g id="Capa_5" data-name="Capa 5">
+    <g>
+      <g>
+        <g>
+          <path class="cls-6" d="M63.59,.75L30.68,54.68c-.19,.31-.2,.7-.04,1.02L63.55,120.22c.39,.76,1.48,.76,1.87,0L98.33,55.37c.17-.33,.15-.71-.04-1.02L65.38,.75c-.41-.67-1.38-.67-1.79,0Z"/>
+          <polygon class="cls-11" points="64.48 2.2 64.48 71 31.73 54.39 64.48 2.2"/>
+          <polygon class="cls-13" points="97.1 55.39 64.48 71 64.48 2.2 97.1 55.39"/>
+          <polygon class="cls-12" points="64.48 119.34 64.48 71 31.73 54.39 64.48 119.34"/>
+          <polygon class="cls-3" points="97.1 55.39 64.48 71 64.48 119.34 97.1 55.39"/>
+        </g>
+        <rect class="cls-7" x=".5" y="35.37" width="125.28" height="50.31" rx="25.15" ry="25.15"/>
+      </g>
+      <text class="cls-8" transform="translate(10.86 71)"><tspan class="cls-4" x="0" y="0">R</tspan><tspan class="cls-5" x="15.65" y="0">E</tspan><tspan class="cls-1" x="28.33" y="0">G</tspan><tspan class="cls-2" x="44.26" y="0">I</tspan><tspan class="cls-10" x="50.27" y="0">S</tspan><tspan x="64.35" y="0">T</tspan><tspan class="cls-9" x="82.29" y="0">E</tspan><tspan x="96.59" y="0">R</tspan></text>
+    </g>
+  </g>
+</svg>
