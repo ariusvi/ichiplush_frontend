@@ -1,10 +1,10 @@
 @import '../../styles/colors.css';
 
 .homeDesign {
-    min-height: 100%;
-    min-width: 100%;
-    height: 90vh;
-    width: 99vw;
+    min-height: 90vh;
+    max-width: 100%;
+    /* height: 90vh; */
+    /* width: 99vw; */
     overflow: hidden;
 
     display: flex;
@@ -16,26 +16,72 @@
     background-size: cover;
 }
 
+.homeDesign img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (max-width: 430px) {
+    .homeDesign img {
+        width: 80%;
+    }
+    .logo {
+        width: 50%;
+    }
+    .ichigoHome {
+        width: 70%;
+    }
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.ichigoHome{
+    max-width: 100%;
+    height: auto;
+    margin: 1em;
+}
+
+
 .homeCenter{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
     background-color: white;
     border: solid var(--darkPurple) 0.2em;
     border-radius: 10px;
-    padding: 2em;
+    /* padding: 2em; */
     margin: 2em;
+
+    max-width: 100%;
 
 }
 
 .homeText{
     background-color: white;
 
-    width: 30vw;
+    max-width: 100%;
+    /* width: 30vw; */
     margin: 2em;
 }
 
 .logo:hover {
     transform: none;
+}
+
+@media screen and (min-width: 768px) {
+    .homeCenter {
+        
+        max-width: 50%;
+        flex-direction: row;
+    }
+
+    .homeText {
+        
+        max-width: 80%;
+    }
 }

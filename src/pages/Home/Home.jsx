@@ -8,9 +8,9 @@ export const Home = () => {
     return (
         <>
             <div className='homeDesign'>
-                <img src={ichigo_logo} alt="Ichigo Logo" />
+                <img src={ichigo_logo} alt="Ichigo Logo" className='logo' />
             <div className='homeCenter'> 
-                <div><img src={homeImage} alt="Home" /></div>
+                <div className='ichigoHome'><img src={homeImage} alt="Home" /></div>
                 <div className='homeText'>Bienvenidos a todos. Soy Ichigo Higashikata, una Vtuber, diseñadora de moda y artesana.
                 Aquí podrás encontrar todas mis redes sociales y toda la información sobre mis comisiones de peluches.
                 
