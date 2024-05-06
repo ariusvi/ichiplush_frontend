@@ -1,0 +1,14 @@
+.customLinkDesign{
+    color: white;
+    font-weight: bold;
+    transition: 0.2s;
+    margin: 1em;
+}
+
+.customLinkDesign:hover{
+    color: var(--gold);
+    transform: scale(1.1);
+    transition: 0.2s;
+    cursor: pointer;
+    font-weight: bold;
+}
