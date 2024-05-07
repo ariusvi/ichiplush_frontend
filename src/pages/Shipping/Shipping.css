@@ -1,0 +1,59 @@
+@import '../../styles/colors.css';
+
+.shippingDesign {
+    min-height: 83.7vh;
+    max-width: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../assets/images/SVG/estrellas.svg");
+    background-size: cover;
+}
+
+.shippingCenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    border: solid var(--darkPurple) 0.2em;
+    border-radius: 10px;
+
+    margin: 2em;
+
+    max-width: 100%;
+}
+
+.shippingTitle{
+    font-family: 'CandyBeans', sans-serif;
+    color: var(--lightPink);
+    font-size: 3em;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+.shippingText{
+    background-color: white;
+
+    max-width: 100%;
+    /* width: 30vw; */
+    margin: 2em;
+}
+
+@media screen and (min-width: 768px) {
+    .shippingCenter {
+        
+        max-width: 50%;
+        flex-direction: row;
+    }
+
+    .shippingText {
+        
+        max-width: 80%;
+    }
+}

@@ -28,8 +28,6 @@ export const Tos = () => {
 
                     <h1>Exactitud, integridad y actualidad de la información</h1>
                     <p>No somos responsables de que la información disponible en este sitio no sea precisa, completa o actual. El material de este sitio se proporciona solo para información general y no se debe recaer en él ni utilizarse como la única base para tomar decisiones sin consultar fuentes de información primarias, más precisas, más completas o más oportunas.
-
-
                         Este sitio puede contener cierta información histórica. La información histórica, necesariamente, no es actual y se proporciona solo para su referencia. Nos reservamos el derecho de modificar el contenido de este sitio en cualquier momento, pero no tenemos la obligación de actualizar ninguna información en nuestro sitio. Acepta que es su responsabilidad monitorear los cambios en nuestro sitio web.</p>
                     <h1>Modificaciones al servicio y precios</h1>
                     <p>Los precios de nuestros productos están sujetos a cambios sin previo aviso. Nos reservamos el derecho en cualquier momento de modificar o interrumpir el Servicio (o cualquier parte o contenido del mismo) sin previo aviso en cualquier momento.
