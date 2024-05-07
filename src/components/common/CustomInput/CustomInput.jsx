@@ -1,13 +1,14 @@
 import './CustomInput.css'
 
-export const CustomInput = ({ className, type, placeholder, value, onChange }) => {
+export const CustomInput = ({ className, type, name, value, placeholder, changeEmit, }) => {
     return (
         <input
             className={className}
             type={type}
-            placeholder={placeholder}
+            name={name}
             value={value}
-            onChange={onChange}
+            placeholder={placeholder}
+            onChange={(e) => changeEmit(e)}
         />
     )
 }
