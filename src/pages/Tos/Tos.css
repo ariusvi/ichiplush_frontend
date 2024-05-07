@@ -1,10 +1,8 @@
 @import '../../styles/colors.css';
 
-.homeDesign {
+.tosDesign {
     min-height: 83.7vh;
     max-width: 100%;
-    /* height: 90vh; */
-    /* width: 99vw; */
     overflow: hidden;
 
     display: flex;
@@ -12,46 +10,10 @@
     justify-content: center;
     align-items: center;
     background-image: url("../../assets/images/SVG/estrellas.svg");
-    /* background-color: #f5f5f5; */
     background-size: cover;
 }
 
-.homeDesign img {
-    max-width: 100%;
-    height: auto;
-}
-
-@media screen and (max-width: 430px) {
-    .homeDesign img {
-        width: 80%;
-    }
-    .logoIchigo {
-        width: 50%;
-    }
-    .ichigoHome {
-        width: 70%;
-    }
-}
-
-.logoIchigo {
-    max-width: 100%;
-    height: auto;
-}
-
-.ichigoHome{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    /* max-width: 100%; */
-    height: auto;
-    margin: 1em;
-}
-
-
-.homeCenter{
+.tosCenter{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,14 +22,22 @@
     background-color: white;
     border: solid var(--darkPurple) 0.2em;
     border-radius: 10px;
-    /* padding: 2em; */
+
     margin: 2em;
 
     max-width: 100%;
-
 }
 
-.homeText{
+.tosTitle{
+    font-family: 'CandyBeans', sans-serif;
+    color: var(--lightPink);
+    font-size: 3em;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+.tosText{
     background-color: white;
 
     max-width: 100%;
@@ -76,13 +46,13 @@
 }
 
 @media screen and (min-width: 768px) {
-    .homeCenter {
+    .tosCenter {
         
         max-width: 50%;
         flex-direction: row;
     }
 
-    .homeText {
+    .tosText {
         
         max-width: 80%;
     }
