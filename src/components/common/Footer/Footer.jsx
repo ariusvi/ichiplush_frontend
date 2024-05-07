@@ -12,7 +12,8 @@ export const Footer = () => {
         <div className='footerDesign'>
             <div className='footerLinks'><CustomLink title="T.O.S." destination="/tos" /> 
             <CustomLink title="Política de envío" destination="/shipping" /> 
-            F.A.Q. · Información de contacto </div>
+            <CustomLink title="Contacto" destination="/contact" />
+            F.A.Q. </div>
             <div className='socialMedia'>
             <a href="https://twitter.com/VTichigo" target="_blank" rel="noopener noreferrer"><img src={twitter}/></a>
                 <a href="https://twitch.tv/VTichigo" target="_blank" rel="noopener noreferrer"><img src={twitch}/></a>

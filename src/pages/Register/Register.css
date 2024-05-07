@@ -10,6 +10,7 @@
 
 .registerDesign {
     min-height:  83.7vh;
+    min-width: 99.1vw;
     max-width: 100%;
 
     overflow: hidden;

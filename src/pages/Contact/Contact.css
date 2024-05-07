@@ -1,7 +1,8 @@
 @import '../../styles/colors.css';
 
-.shippingDesign {
+.contactDesign {
     min-height: 83.7vh;
+    min-width: 99.1vw;
     max-width: 100%;
     overflow: hidden;
 
@@ -13,7 +14,7 @@
     background-size: cover;
 }
 
-.shippingCenter{
+.contactCenter{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,7 +29,7 @@
     max-width: 100%;
 }
 
-.shippingTitle{
+.contactTitle{
     font-family: 'CandyBeans', sans-serif;
     color: var(--lightPink);
     font-size: 3em;
@@ -37,7 +38,7 @@
     max-width: 100%;
 }
 
-.shippingText{
+.contactText{
     background-color: white;
 
     max-width: 100%;
@@ -46,13 +47,13 @@
 }
 
 @media screen and (min-width: 768px) {
-    .shippingCenter {
+    .contactCenter {
         
         max-width: 50%;
-
+        flex-direction: row;
     }
 
-    .shippingText {
+    .contactText {
         
         max-width: 80%;
     }
@@ -62,14 +63,15 @@
     .shippingTitle {
         font-size: 2.5em;
     }
-    .shippingCenter {
+
+    .contactCenter {
         
-        max-width: 60%;
+        max-width: 40%;
         flex-direction: row;
     }
 
-    .shippingText {
+    .contactText {
         
-        max-width: 70%;
+        max-width: 40%;
     }
 }
