@@ -10,7 +10,8 @@ export const Footer = () => {
 
     return (
         <div className='footerDesign'>
-            <div className='footerLinks'><CustomLink title="T.O.S." destination="/tos" /> 
+            <div className='footerLinks mobile-hide'>
+            <CustomLink title="T.O.S." destination="/tos" /> 
             <CustomLink title="Política de envío" destination="/shipping" /> 
             <CustomLink title="Contacto" destination="/contact" />
             F.A.Q. </div>

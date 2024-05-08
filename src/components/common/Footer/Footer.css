@@ -52,3 +52,9 @@
 .socialMedia img:hover{
     transform: scale(1.3);
 }
+
+@media (max-width: 600px) {
+    .mobile-hide {
+        display: none;
+    }
+}
