@@ -11,8 +11,7 @@
     align-items: center;
 
     background-image: url("../../assets/images/SVG/estrellas.svg");
-    background-size: cover;
-}	
+}   
 
 .catalogueCenter{
     display: flex;
@@ -20,13 +19,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: white;
-    border: solid var(--darkPurple) 0.2em;
-    border-radius: 10px;
-
-    margin: 2em;
-
-    max-width: 100%;
+    max-width: 70%;
 }
 
 .catalogueTitle{
@@ -40,7 +33,13 @@
 
 @media screen and (min-width: 768px) {
     .catalogueCenter {
-        max-width: 50%;
         flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .CustomCard {
+        flex: 0 0 calc(50% - 20px); 
+        margin: 10px; 
     }
 }
