@@ -49,3 +49,26 @@ export const registerUser = async (user) => {
 
     }
 };
+
+export const getItems = async () => {
+
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    try {
+        const response = await fetch(`${root}catalogue`, options);
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}

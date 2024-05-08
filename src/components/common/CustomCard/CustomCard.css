@@ -1,0 +1,51 @@
+@import '../../../styles/colors.css';
+
+.cardDesign{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    border: solid var(--darkPurple) 0.2em;
+    border-radius: 10px;
+
+    margin: 2em;
+
+    max-width: 100%;
+}
+
+.cardTitle{
+    font-family: 'CandyBeans', sans-serif;
+    color: var(--darkPink);
+    font-size: 1em;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+.cardDescription{
+    background-color: white;
+
+    max-width: 100%;
+
+    margin: 2em;
+}
+
+.cardImage{
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .cardDesign {
+        
+        max-width: 50%;
+        flex-direction: row;
+    }
+
+    .cardDescription {
+        
+        max-width: 80%;
+    }
+}

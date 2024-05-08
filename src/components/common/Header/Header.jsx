@@ -38,6 +38,7 @@ export const Header = () => {
     return (
         <div className='headerDesign'>
             <CustomLink title="HOME" destination="/" />
+            <CustomLink title="EXAMPLES" destination="/examples" />
             {reduxUser?.credentials?.token
             ? (
                 <>
