@@ -54,12 +54,10 @@ export const Budget = () => {
                     </div>
                     <div>Cantidad de peluches:
                     <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)} min="1" required /></div>
-                    
-                    
                     <button type="submit" onClick={handleSubmit}>Create Budget</button>
                 </form>
-                {totalPrice > 0 && <div>Precio: {totalPrice} €</div>}
-                {reference && <div>Código de referencia: {reference}</div>}
+                <div className="budgetMsg">{totalPrice > 0 && <div>Precio: {totalPrice} €</div>}
+                {reference && <div>Código de referencia: {reference}</div>}</div>
                 </div>
             </div>
         </div>

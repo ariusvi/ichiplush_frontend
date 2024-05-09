@@ -2,6 +2,7 @@
 
 .budgetDesign {
     min-height: 83.7vh;
+    min-width: 99.1vw;
     max-width: 100%;
     overflow: hidden;
 
@@ -13,11 +14,26 @@
     background-size: cover;
 }
 
-/* .budgetDesign img {
+.budgetDesign img {
     max-width: 100%;
     height: auto;
     background-color: none;
-} */
+}
+
+.budgetTitle{
+    font-family: 'CandyBeans', sans-serif;
+    color: var(--lightPink);
+    font-size: 3em;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+@media screen and (max-width: 768px) { 
+    .budgetImage {
+        display: none;
+    }
+}
 
 @media screen and (max-width: 430px) {
     .budgetDesign img {
@@ -38,7 +54,7 @@
 
 .budgetText{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -51,6 +67,11 @@
     border: solid var(--darkPurple) 0.2em;
     border-radius: 10px;
 
+}
+
+.budgetMsg{
+    margin: 1em;
+    color: var(--darkPink);
 }
 
 
