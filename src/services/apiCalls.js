@@ -72,3 +72,27 @@ export const getItems = async () => {
         throw error;
     }
 }
+
+export const createBudget = async (budget) => {
+    
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(budget)
+        };
+    
+        try {
+            const response = await fetch(`${root}budget/new`, options);
+            const data = await response.json();
+    
+            if (!data.success) {
+                throw new Error(data.message)
+            }
+    
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }

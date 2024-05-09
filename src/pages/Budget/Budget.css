@@ -1,0 +1,56 @@
+@import '../../styles/colors.css';
+
+.budgetDesign {
+    min-height: 83.7vh;
+    max-width: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../assets/images/SVG/estrellas.svg");
+    background-size: cover;
+}
+
+/* .budgetDesign img {
+    max-width: 100%;
+    height: auto;
+    background-color: none;
+} */
+
+@media screen and (max-width: 430px) {
+    .budgetDesign img {
+        width: 80%;
+    }
+    
+}
+
+
+.budgetCenter{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: none;
+}
+
+.budgetText{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    max-width: 100%;
+    /* width: 30vw; */
+    margin: 2em;
+    padding: 2em;
+    border: solid var(--darkPurple) 0.2em;
+    border-radius: 10px;
+
+}
+
+

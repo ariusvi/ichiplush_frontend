@@ -8,6 +8,7 @@ import { Shipping } from "../Shipping/Shipping"
 import { Contact } from "../Contact/Contact"
 import { Catalogue } from "../Catalogue/Catalogue"
 import { Faq } from "../Faq/Faq"
+import { Budget } from "../Budget/Budget"
 
 export const Body = () => {
 
@@ -23,6 +24,7 @@ export const Body = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/examples" element={<Catalogue />} />
         <Route path="/faq" element={<Faq/>} />
+        <Route path="/budget" element={<Budget/>} />
     </Routes>        
     )
 }
