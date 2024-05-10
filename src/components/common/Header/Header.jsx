@@ -44,7 +44,7 @@ export const Header = () => {
             {reduxUser?.credentials?.token
             ? (
                 <>
-                    <CustomLink title={reduxUser.credentials.username} destination="/profile" />
+                    <CustomLink title={reduxUser?.credentials?.user?.username} destination="/profile" />
                     <div className='outDesign' onClick={handleLogout}>LOGOUT</div>
                 </>
             )
