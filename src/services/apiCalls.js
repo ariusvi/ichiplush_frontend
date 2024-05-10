@@ -74,48 +74,73 @@ export const getItems = async () => {
 }
 
 export const createBudget = async (budget) => {
-    
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(budget)
-        };
-    
-        try {
-            const response = await fetch(`${root}budget/new`, options);
-            const data = await response.json();
-    
-            if (!data.success) {
-                throw new Error(data.message)
-            }
-    
-            return data;
-        } catch (error) {
-            throw error;
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(budget)
+    };
+
+    try {
+        const response = await fetch(`${root}budget/new`, options);
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message)
         }
+
+        return data;
+    } catch (error) {
+        throw error;
     }
+}
 
 export const getReviews = async () => {
-    
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
-    
-        try {
-            const response = await fetch(`${root}review`, options);
-            const data = await response.json();
-    
-            if (!data.success) {
-                throw new Error(data.message)
-            }
-    
-            return data;
-        } catch (error) {
-            throw error;
+
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
         }
+    };
+
+    try {
+        const response = await fetch(`${root}review`, options);
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error) {
+        throw error;
     }
+}
+
+export const getProfile = async (token) => {
+
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${root}users/profile`, options)
+        const data = await response.json()
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error) {
+        return error
+    }
+
+};
