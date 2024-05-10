@@ -169,3 +169,24 @@ export const getAddress = async (token) => {
     }
 
     }
+
+export const createAddress = async (address, token) => {
+    
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Baerer ${token}`
+            },
+            body: JSON.stringify(address)
+        };
+        try {
+            const response = await fetch(`${root}address/create`, options);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            return error
+        }
+    }
