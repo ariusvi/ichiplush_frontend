@@ -2,6 +2,7 @@
 
 .reviewsDesign {
     min-height: 83.7vh;
+    min-width: 99.1vw;
     max-width: 100%;
     overflow: hidden;
 
@@ -19,7 +20,28 @@
     justify-content: center;
     align-items: center;
 
-    max-width: 70%;
+
+    max-width: 100%;
+}
+
+.reviewText{
+    background-color: white;
+    
+    max-width: 100%;
+    min-width: 15vw;
+    min-height: 30vh;
+    margin: 2em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: solid var(--darkPurple) 0.2em;
+    border-radius: 10px;
+    padding: 2em;
+    margin: 2em;
+
 }
 
 .reviewsTitle{

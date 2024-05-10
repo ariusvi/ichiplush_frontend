@@ -54,3 +54,8 @@
         margin: auto; 
     }
 }
+
+.cardUser{
+    color: var(--darkPink);
+    font-size: 1.3em;
+}

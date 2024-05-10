@@ -26,23 +26,24 @@ export const Reviews = () => {
             <div className='reviewsDesign'>
                 <div className='reviewsTitle'>Opiniones</div>
                 <div className='reviewsCenter'>
-                    {
-                    reviews.map ((review, index) => (
-                        <div key={index}>
-                            <CustomCard
-                                description={review.text}
-                            />
-                            <ReactStars
-                                count={5}
-                                value={review.rating}
-                                size={24}
-                                activeColor="#ffd700"
-                                isHalf={true}
-                                edit={false}
-                            />
-                        </div>
-                    ))
-                    }
+                    <div className="reviewText">
+                        {reviews.map((review, index) => (
+                            <div key={index} className="reviewCard">
+                                <div>{review.user}</div>
+                                <div>{review.text}</div>
+                                <div className="reviewRating">
+                                    <ReactStars
+                                        count={5}
+                                        value={review.rating}
+                                        size={24}
+                                        activeColor="#ffd700"
+                                        isHalf={true}
+                                        edit={false}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>
