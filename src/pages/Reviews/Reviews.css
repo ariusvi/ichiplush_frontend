@@ -1,0 +1,45 @@
+@import '../../styles/colors.css';
+
+.reviewsDesign {
+    min-height: 83.7vh;
+    max-width: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("../../assets/images/SVG/estrellas.svg");
+}
+
+.reviewsCenter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 70%;
+}
+
+.reviewsTitle{
+    font-family: 'CandyBeans', sans-serif;
+    color: var(--lightPink);
+    font-size: 3em;
+    margin: 1em;
+
+    max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .reviewsCenter {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .CustomCard {
+        flex: 0 0 calc(50% - 20px); 
+        margin: 10px; 
+    }
+}

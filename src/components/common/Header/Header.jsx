@@ -40,6 +40,7 @@ export const Header = () => {
             <CustomLink title="HOME" destination="/" />
             <CustomLink title="EJEMPLOS" destination="/examples" />
             <CustomLink title="PRESUPUESTO" destination="/budget" />
+            <CustomLink title="OPINIONES" destination="/reviews" />
             {reduxUser?.credentials?.token
             ? (
                 <>

@@ -96,3 +96,26 @@ export const createBudget = async (budget) => {
             throw error;
         }
     }
+
+export const getReviews = async () => {
+    
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+    
+        try {
+            const response = await fetch(`${root}review`, options);
+            const data = await response.json();
+    
+            if (!data.success) {
+                throw new Error(data.message)
+            }
+    
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
