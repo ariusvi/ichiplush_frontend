@@ -144,3 +144,28 @@ export const getProfile = async (token) => {
     }
 
 };
+
+export const getAddress = async (token) => {
+    
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${root}address`, options)
+        const data = await response.json()
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error) {
+        return error
+    }
+
+    }

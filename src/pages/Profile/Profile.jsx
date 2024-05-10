@@ -4,21 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { updated, userData } from "../../app/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
+import { getAddress } from '../../services/apiCalls';
 
 
-export const  Profile = () => {
+export const Profile = () => {
 
     const navigate = useNavigate();
 
-    const [selectedProfile, setSelectedProfile] = useState('');
-    const [selectedAddress, setSelectedAddress] = useState('');
-    const [selectedOrder, setSelectedOrder] = useState('');
-
-
-    const [user, setUser] = useState({
-        username: '',
-        email: '',
-    });
+    const [showInfo, setShowInfo] = useState('');
+    const [addressData, setAddressData] = useState(null);
 
     const reduxUser = useSelector(userData);
 
@@ -35,33 +29,46 @@ export const  Profile = () => {
         }
     }, [reduxUser])
 
+    const handleButtonClick = (buttonName) => {
+        if (showInfo === buttonName) {
+            setShowInfo('');
+        } else {
+            setShowInfo(buttonName);
+        }
+    }
+
+    useEffect(() => {
+        if (showInfo === 'Direcciones') {
+            getAddress(token)
+                .then(data => setAddressData(data))
+                .catch(error => console.error(error));
+        }
+    }, [showInfo]);
+
+    console.log(addressData, 'addressData');
+
     return (
         <>
             <div className='profileDesign'>
-                <div className='profileTitle'>Profile</div>
+                <div className='profileTitle'>Tu área</div>
                 <div className='profileCenter'>
-                    <select name="perfil" id="perfil" onChange={(e) => setSelectedProfile(e.target.value)}>
-                        <option value="">Perfil</option>
-                        {/* Aquí puedes añadir las opciones para el dropdown de Perfil */}
-                    </select>
-                    {selectedProfile && <div>{/* Aquí puedes mostrar más información sobre el perfil seleccionado */}</div>}
+                    <button onClick={() => handleButtonClick('Direcciones')}>Direcciones</button>
+                    {showInfo === 'Direcciones' && addressData && (
+                        <div>
+                            <p>Title: {addressData.data[0].title}</p>
+                            <p>Name: {addressData.data[0].name}</p>
+                            <p>Surname: {addressData.data[0].surname}</p>
+                            <p>Phone: {addressData.data[0].phone}</p>
+                            <p>Street: {addressData.data[0].street}</p>
+                            <p>City: {addressData.data[0].city}</p>
+                            <p>State: {addressData.data[0].state}</p>
+                            <p>Country: {addressData.data[0].country}</p>
+                            <p>Postal Code: {addressData.data[0].postalCode}</p>
+                        </div>
+                    )}
 
-                    <div className='profileText'>
-                        Username: {reduxUser.credentials.user.username}
-                        Email: {reduxUser.credentials.user.email}
-                    </div>
-
-                    <select name="direcciones" id="direcciones" onChange={(e) => setSelectedAddress(e.target.value)}>
-                        <option value="">Direcciones</option>
-                        {/* Aquí puedes añadir las opciones para el dropdown de Direcciones */}
-                    </select>
-                    {selectedAddress && <div>{/* Aquí puedes mostrar más información sobre la dirección seleccionada */}</div>}
-
-                    <select name="pedidos" id="pedidos" onChange={(e) => setSelectedOrder(e.target.value)}>
-                        <option value="">Pedidos</option>
-                        {/* Aquí puedes añadir las opciones para el dropdown de Pedidos */}
-                    </select>
-                    {selectedOrder && <div>{/* Aquí puedes mostrar más información sobre el pedido seleccionado */}</div>}
+                    <button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
+                    {showInfo === 'Pedidos' && <div>PEDIDOS BLAH BLAH BLAH</div>}
                 </div>
             </div>
         </>
