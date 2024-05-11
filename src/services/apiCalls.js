@@ -146,7 +146,7 @@ export const getProfile = async (token) => {
 };
 
 export const getAddress = async (token) => {
-    
+
     const options = {
         method: "GET",
         headers: {
@@ -168,31 +168,31 @@ export const getAddress = async (token) => {
         return error
     }
 
-    }
+}
 
 export const createAddress = async (address, token) => {
-    
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Baerer ${token}`
-            },
-            body: JSON.stringify(address)
-        };
-        try {
-            const response = await fetch(`${root}address/create`, options);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return await response.json();
-        } catch (error) {
-            return error
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+        body: JSON.stringify(address)
+    };
+    try {
+        const response = await fetch(`${root}address/create`, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        return await response.json();
+    } catch (error) {
+        return error
     }
+}
 
 export const getDefaultAddress = async (token) => {
-        
+
     const options = {
         method: "GET",
         headers: {
@@ -214,110 +214,134 @@ export const getDefaultAddress = async (token) => {
         return error
     }
 
-    }
+}
 
 export const updateAddress = async (address, token) => {
-        
-        const options = {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Baerer ${token}`
-            },
-            body: JSON.stringify(address)
-        };
-        try {
-            const response = await fetch(`${root}address`, options);
-            if (!response.ok) {
-                throw new Error(data.message);
-            }
-            return await response.json();
-        } catch (error) {
-            return error
-        }
-    }
 
-    export const deleteAddress = async (token, address) => {
-        const options = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Baerer ${token}`
-            },
-            body: JSON.stringify(address)
-        };
-        try {
-            const response = await fetch(`${root}address`, options);
-            if (!response.ok) {
-                throw new Error(data.message);
-            }
-            return await response.json();
-        } catch (error) {
-            return error
-        }
-    }
-
-    export const createOrder = async (order, token) => {
-            
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Baerer ${token}`
-            },
-            body: JSON.stringify(order)
-        };
-        try {
-            const response = await fetch(`${root}order/create`, options);
-            if (!response.ok) {
-                throw new Error(data.message);
-            }
-            return await response.json();
-        } catch (error) {
-            return error
-        }
-    }
-
-    export const getOrders = async (token) => {
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Baerer ${token}`
-            },
-        };
-        try {
-            const response = await fetch(`${root}order`, options);
-            if (!response.ok) {
-                throw new Error(data.message);
-            }
-            const data = await response.json();
-
-            return data;
-        } catch (error) {
-            return error
-        }
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+        body: JSON.stringify(address)
     };
+    try {
+        const response = await fetch(`${root}address`, options);
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        return await response.json();
+    } catch (error) {
+        return error
+    }
+}
 
-    export const createReview = async (review, token) => {
-                
-                const options = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Baerer ${token}`
-            },
-            body: JSON.stringify(review)
-        };
-            try {
-                const response = await fetch(`${root}review/create`, options);
-                if (!response.ok) {
-                    throw new Error(data.message);
-                }
-                const data = await response.json();
-    
-                return data;
-            } catch (error) {
-                return error
-            }
-        };
+export const deleteAddress = async (token, address) => {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+        body: JSON.stringify(address)
+    };
+    try {
+        const response = await fetch(`${root}address`, options);
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        return await response.json();
+    } catch (error) {
+        return error
+    }
+}
+
+export const createOrder = async (order, token) => {
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+        body: JSON.stringify(order)
+    };
+    try {
+        const response = await fetch(`${root}order/create`, options);
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        return await response.json();
+    } catch (error) {
+        return error
+    }
+}
+
+export const getOrders = async (token) => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+    };
+    try {
+        const response = await fetch(`${root}order`, options);
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        return error
+    }
+};
+
+export const createReview = async (review, token) => {
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+        body: JSON.stringify(review)
+    };
+    try {
+        const response = await fetch(`${root}review/create`, options);
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        return error
+    }
+};
+
+export const getUsers = async (token) => {
+
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    }
+
+    try {
+        const response = await fetch(`${root}users`, options);
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.message);
+        }
+
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};

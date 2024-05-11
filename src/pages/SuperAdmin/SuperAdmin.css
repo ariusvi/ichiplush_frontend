@@ -1,0 +1,73 @@
+@import '../../styles/colors.css';
+
+.superadminDesign{
+    min-height: 83.7vh;
+    min-width: 99.1vw;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:aliceblue;
+
+}
+
+.adminTitle{
+    font-size: 3em;
+    font-weight: bold;
+    color:black;
+    margin: 1em;
+}
+
+.adminCenter{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2em;
+    margin: 2em;
+
+    max-width: 100%;
+
+}
+
+.titleTable{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    margin: 1.5em;
+
+    background-color:var(--lightPurple);
+}
+
+.usersAdmin table {
+    width: 70vw;
+    border-collapse: collapse;
+    background-color: #f2f2f2;
+}
+
+.usersAdmin th, .usersAdmin td {
+    border: 1.5px solid  black;
+    padding: 8px;
+}
+
+.usersAdmin tr:nth-child(even) {
+
+}
+
+.usersAdmin th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--darkPurple);
+    color: white;
+}
