@@ -11,6 +11,7 @@ import { updateAddress } from '../../services/apiCalls';
 import { deleteAddress } from '../../services/apiCalls';
 import { createOrder } from '../../services/apiCalls';
 import { getOrders } from '../../services/apiCalls';
+import { createReview } from '../../services/apiCalls'; // Import the createReview function
 
 
 
@@ -162,25 +163,40 @@ export const Profile = () => {
         setTimeout(() => setOrderMessage(''), 3000);
     };
 
-    const [orders, setOrders] = useState([]); 
+    const [orders, setOrders] = useState([]);
 
     const fetchOrders = async () => {
         try {
-            const fetchedOrders = await getOrders(token); 
+            const fetchedOrders = await getOrders(token);
             if (fetchedOrders && Array.isArray(fetchedOrders.data)) {
-                setOrders(fetchedOrders.data); 
+                setOrders(fetchedOrders.data);
             } else {
                 console.error('Error: fetched orders is not an array');
             }
         } catch (error) {
-            console.error(error); 
+            console.error(error);
         }
     };
-    
+
     useEffect(() => {
-        fetchOrders(); 
+        fetchOrders();
     }, []);
-    
+
+
+    const [orderId, setOrderId] = useState('');
+    const [text, setText] = useState('');
+    const [rating, setRating] = useState('');
+
+    const handleReviewSubmit = async (event) => {
+        event.preventDefault();
+        const review = { orderId, text, rating };
+        try {
+            const response = await createReview(review, token);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
 
     return (
@@ -373,15 +389,15 @@ export const Profile = () => {
                 <div className='profileOrders'>
                     <button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
                     {showInfo === 'Pedidos' && <div>
-                    {orderMessage && <p>{orderMessage}</p>}
-                    {orders.map(order => (
-                        <div key={order.id}>
-                            <p>ID pedido: {order.id}</p>
-                            <p>Estado: {order.status}</p>
-                            
-                        </div>
-                    ))}
-                        </div>}
+                        {orderMessage && <p>{orderMessage}</p>}
+                        {orders.map(order => (
+                            <div key={order.id}>
+                                <p>ID pedido: {order.id}</p>
+                                <p>Estado: {order.status}</p>
+
+                            </div>
+                        ))}
+                    </div>}
                     <p><input
                         type="text"
                         value={reference}
@@ -391,6 +407,15 @@ export const Profile = () => {
                         <button onClick={handleCreateOrder}>Crear pedido</button></p>
                     {orderMessage && <p>{orderMessage}</p>}
 
+                </div>
+
+                <div className='profileReview'>
+                    <form onSubmit={handleReviewSubmit}>
+                        <p>ID pedido:</p><input type='text' value={orderId} onChange={(e) => setOrderId(e.target.value)} placeholder='Order ID' />
+                        <p>Opinión:</p><input type='text' value={text} onChange={(e) => setText(e.target.value)} placeholder='Review text' />
+                        <p>Puntuación:</p><input type='number' value={rating} onChange={(e) => setRating(e.target.value)} placeholder='Rating' />
+                        <p><button type='submit'>Publica tu opinión</button></p>
+                    </form>
                 </div>
             </div>
         </>

@@ -121,4 +121,18 @@
     max-width: 100%;
 }
 
+.profileReview{    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: solid var(--darkPurple) 0.2em;
+    border-radius: 10px;
+
+    padding: 2em;
+    margin: 2em;
+
+    max-width: 100%;
+}
 

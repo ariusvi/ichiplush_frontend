@@ -298,3 +298,26 @@ export const updateAddress = async (address, token) => {
             return error
         }
     };
+
+    export const createReview = async (review, token) => {
+                
+                const options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Baerer ${token}`
+            },
+            body: JSON.stringify(review)
+        };
+            try {
+                const response = await fetch(`${root}review/create`, options);
+                if (!response.ok) {
+                    throw new Error(data.message);
+                }
+                const data = await response.json();
+    
+                return data;
+            } catch (error) {
+                return error
+            }
+        };
