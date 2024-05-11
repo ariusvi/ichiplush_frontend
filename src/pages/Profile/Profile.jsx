@@ -11,8 +11,7 @@ import { updateAddress } from '../../services/apiCalls';
 import { deleteAddress } from '../../services/apiCalls';
 import { createOrder } from '../../services/apiCalls';
 import { getOrders } from '../../services/apiCalls';
-import { createReview } from '../../services/apiCalls'; // Import the createReview function
-
+import { createReview } from '../../services/apiCalls';
 
 
 export const Profile = () => {
@@ -52,13 +51,24 @@ export const Profile = () => {
         }
     }, [reduxUser])
 
-    const handleButtonClick = (buttonName) => {
-        if (showInfo === buttonName) {
-            setShowInfo('');
-        } else {
-            setShowInfo(buttonName);
+    const handleButtonClick = async (infoType) => {
+        setShowInfo(infoType);
+        if (infoType === 'Direcciones') {
+            const fetchedAddressData = await getAddressData(token);
+            if (fetchedAddressData && fetchedAddressData.length > 0) {
+                setAddressData(fetchedAddressData);
+            } else {
+                setAddressData('No hay datos');
+            }
+        } else if (infoType === 'Pedidos') {
+            const fetchedOrders = await getOrders(token);
+            if (fetchedOrders && fetchedOrders.length > 0) {
+                setOrders(fetchedOrders);
+            } else {
+                setOrders('No hay datos');
+            }
         }
-    }
+    };
 
     useEffect(() => {
         if (showInfo === 'Direcciones') {
@@ -67,7 +77,6 @@ export const Profile = () => {
                 .catch(error => console.error(error));
         }
     }, [showInfo]);
-
 
 
     const handleInputChange = (event) => {
@@ -199,6 +208,8 @@ export const Profile = () => {
     };
 
 
+
+
     return (
         <>
             <div className='profileDesign'>
@@ -206,20 +217,23 @@ export const Profile = () => {
                 <div className='profileCenter'>
                     <div className='profileDirections'>
                         <button onClick={() => handleButtonClick('Direcciones')}>Dirección Principal</button>
-                        {showInfo === 'Direcciones' && addressData && (
-                            <>
-                                <div>
-                                    <p>Titulo: {addressData.data.title}</p>
-                                    <p>Nombre: {addressData.data.name}</p>
-                                    <p>Apellidos: {addressData.data.surname}</p>
-                                    <p>Telefono: {addressData.data.phone}</p>
-                                    <p>Direccion: {addressData.data.street}</p>
-                                    <p>Ciudad: {addressData.data.city}</p>
-                                    <p>Provicia:{addressData.data.state}</p>
-                                    <p>Pais: {addressData.data.country}</p>
-                                    <p>Codigo Postal: {addressData.data.postalCode}</p>
-                                </div>
-                            </>
+                        {showInfo === 'Direcciones' && (
+                            typeof addressData === 'string' ? <p>{addressData}</p> :
+                                addressData && addressData.data ? (
+                                    <>
+                                        <div>
+                                            <p>Titulo: {addressData.data.title}</p>
+                                            <p>Nombre: {addressData.data.name}</p>
+                                            <p>Apellidos: {addressData.data.surname}</p>
+                                            <p>Telefono: {addressData.data.phone}</p>
+                                            <p>Direccion: {addressData.data.street}</p>
+                                            <p>Ciudad: {addressData.data.city}</p>
+                                            <p>Provicia:{addressData.data.state}</p>
+                                            <p>Pais: {addressData.data.country}</p>
+                                            <p>Codigo Postal: {addressData.data.postalCode}</p>
+                                        </div>
+                                    </>
+                                ) : <p>No hay datos</p>
                         )}
                         {message && <div>{message}</div>}
                     </div>
@@ -388,16 +402,18 @@ export const Profile = () => {
 
                 <div className='profileOrders'>
                     <button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
-                    {showInfo === 'Pedidos' && <div>
-                        {orderMessage && <p>{orderMessage}</p>}
-                        {orders.map(order => (
-                            <div key={order.id}>
-                                <p>ID pedido: {order.id}</p>
-                                <p>Estado: {order.status}</p>
+                    {showInfo === 'Pedidos' && (
+                        typeof orders === 'string' ? <p>{orders}</p> :
+                            <div>
+                                {orderMessage && <p>{orderMessage}</p>}
+                                {orders.map(order => (
+                                    <div key={order.id}>
+                                        <p>ID pedido: {order.id}</p>
+                                        <p>Estado: {order.status}</p>
 
-                            </div>
-                        ))}
-                    </div>}
+                                    </div>
+                                ))}
+                            </div>)}
                     <p><input
                         type="text"
                         value={reference}
