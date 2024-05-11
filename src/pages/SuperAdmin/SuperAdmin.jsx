@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { userData } from "../../app/slices/userSlice";
 
 import { getUsers } from "../../services/apiCalls";
+import { deleteUser } from "../../services/apiCalls";
 
 export const SuperAdmin = () => {
 
@@ -26,6 +27,7 @@ export const SuperAdmin = () => {
     //--------------------GET USERS--------------------
 
     const [Users, setUsers] = useState([]);
+    const [message, setMessage] = useState(null);
 
     const allUsers = async () => {
         try {
@@ -35,7 +37,18 @@ export const SuperAdmin = () => {
             console.log(error)
         }
     }
-    console.log(Users), [Users];
+
+    //--------------------DELETE USER--------------------
+    const handleDeleteUser = async (userId) => {
+        try {
+            await deleteUser(token, userId);
+            setUsers(Users.filter(user => user.id !== userId)); // Update Users state
+            setMessage("Usuario eliminado"); // Set the message
+            setTimeout(() => setMessage(null), 3000); // Remove the message after 3 seconds
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         if (Users.length === 0) {
@@ -58,6 +71,7 @@ export const SuperAdmin = () => {
                     {/* --------------------------------- USERS --------------------------- */}
                     <div className="usersAdmin">
                         <div className="titleTable">USERS</div>
+                        {message && <div className="message">{message}</div>}
                         {Users.length > 0 ? (
                             <table>
                                 <thead>
@@ -67,6 +81,7 @@ export const SuperAdmin = () => {
                                         <th>Email</th>
                                         <th>Role</th>
                                         <th>is Active</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,6 +92,11 @@ export const SuperAdmin = () => {
                                             <td>{user.email}</td>
                                             <td>{user.roleId}</td>
                                             <td>{user.isActive ? 'True' : 'False'}</td>
+                                            <td>
+                                                <button onClick={() => handleDeleteUser(user.id)}>
+                                                    Eliminar
+                                                </button>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

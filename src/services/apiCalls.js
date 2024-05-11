@@ -345,3 +345,24 @@ export const getUsers = async (token) => {
         throw error;
     }
 };
+
+export const deleteUser = async (token, userId) => {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ id: userId }), 
+    };
+    try {
+        const response = await fetch(`${root}users/delete`, options);
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message);
+        }
+        return await response.json();
+    } catch (error) {
+        return error
+    }
+};
