@@ -190,3 +190,28 @@ export const createAddress = async (address, token) => {
             return error
         }
     }
+
+export const getDefaultAddress = async (token) => {
+        
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Baerer ${token}`
+        },
+    };
+
+    try {
+        const response = await fetch(`${root}address/default`, options)
+        const data = await response.json()
+
+        if (!data.success) {
+            throw new Error(data.message)
+        }
+
+        return data;
+    } catch (error) {
+        return error
+    }
+
+    }

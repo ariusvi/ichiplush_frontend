@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { getAddress } from '../../services/apiCalls';
 import { createAddress } from '../../services/apiCalls';
-
+import { getDefaultAddress } from '../../services/apiCalls';
 
 export const Profile = () => {
 
@@ -57,11 +57,13 @@ export const Profile = () => {
 
     useEffect(() => {
         if (showInfo === 'Direcciones') {
-            getAddress(token)
+            getDefaultAddress(token)
                 .then(data => setAddressData(data))
                 .catch(error => console.error(error));
         }
     }, [showInfo]);
+
+    console.log(addressData, "addressData");
 
     const handleInputChange = (event) => {
         setNewAddress({
@@ -94,103 +96,105 @@ export const Profile = () => {
                         {showInfo === 'Direcciones' && addressData && (
                             <>
                                 <div>
-                                    <p>Titulo: {addressData.data[0].title}</p>
-                                    <p>Nombre: {addressData.data[0].name}</p>
-                                    <p>Apellidos: {addressData.data[0].surname}</p>
-                                    <p>Telefono: {addressData.data[0].phone}</p>
-                                    <p>Direccion: {addressData.data[0].street}</p>
-                                    <p>Ciudad: {addressData.data[0].city}</p>
-                                    <p>Provicia:{addressData.data[0].state}</p>
-                                    <p>Pais: {addressData.data[0].country}</p>
-                                    <p>Codigo Postal: {addressData.data[0].postalCode}</p>
+                                    <p>Titulo: {addressData.data.title}</p>
+                                    <p>Nombre: {addressData.data.name}</p>
+                                    <p>Apellidos: {addressData.data.surname}</p>
+                                    <p>Telefono: {addressData.data.phone}</p>
+                                    <p>Direccion: {addressData.data.street}</p>
+                                    <p>Ciudad: {addressData.data.city}</p>
+                                    <p>Provicia:{addressData.data.state}</p>
+                                    <p>Pais: {addressData.data.country}</p>
+                                    <p>Codigo Postal: {addressData.data.postalCode}</p>
                                 </div>
-                                <button onClick={() => setShowForm(!showForm)}>Crear dirección</button>
-                                <div className='formDirection'>{showForm && (
-                                    <form onSubmit={handleFormSubmit}>
-                                        <div>
-                                            Titulo:
-                                            <input name="title"
-                                                value={newAddress.title}
-                                                onChange={handleInputChange}
-                                                placeholder="Título" />
-                                        </div>
-                                        <div>
-                                            Nombre:
-                                            <input name="name"
-                                                value={newAddress.name}
-                                                onChange={handleInputChange}
-                                                placeholder="Nombre" />
-                                        </div>
-                                        <div>
-                                            Apellidos:
-                                            <input name="surname"
-                                                value={newAddress.surname}
-                                                onChange={handleInputChange}
-                                                placeholder="Apellidos" />
-                                        </div>
-                                        <div>
-                                            Telefono:
-                                            <input name="phone"
-                                                value={newAddress.phone}
-                                                onChange={handleInputChange}
-                                                placeholder="Teléfono" />
-                                        </div>
-                                        <div>
-                                            Direccion:
-                                            <input name="street"
-                                                value={newAddress.street}
-                                                onChange={handleInputChange}
-                                                placeholder="Dirección" />
-                                        </div>
-                                        <div>
-                                            Ciudad:
-                                            <input name="city"
-                                                value={newAddress.city}
-                                                onChange={handleInputChange}
-                                                placeholder="Ciudad" />
-                                        </div>
-                                        <div>
-                                            Provicia:
-                                            <input name="state"
-                                                value={newAddress.state}
-                                                onChange={handleInputChange}
-                                                placeholder="Provincia" />
-                                        </div>
-                                        <div>
-                                            Pais:
-                                            <input name="country"
-                                                value={newAddress.country}
-                                                onChange={handleInputChange}
-                                                placeholder="País" />
-                                        </div>
-                                        <div>
-                                            Codigo Postal:
-                                            <input name="postalCode"
-                                                value={newAddress.postalCode}
-                                                onChange={handleInputChange}
-                                                placeholder="Código Postal" />
-                                        </div>
-                                        <div>
-                                            <label>
-                                                Dirección predeterminada:
-                                                <input
-                                                    type="checkbox"
-                                                    name="isDefault"
-                                                    checked={newAddress.isDefault}
-                                                    onChange={handleInputChange}
-                                                />
-                                            </label>
-                                        </div>
-                                        <div><button type="submit">Guardar</button></div>
-                                    </form>
-
-                                )}</div>
                             </>
                         )}
                         {message && <div>{message}</div>}
                     </div>
 
                 </div>
+                <div className='profileCreateAddress'>
+                    <button onClick={() => setShowForm(!showForm)}>Crear dirección</button>
+                    <div className='formDirection'>{showForm && (
+                        <form onSubmit={handleFormSubmit}>
+                            <div>
+                                Titulo:
+                                <input name="title"
+                                    value={newAddress.title}
+                                    onChange={handleInputChange}
+                                    placeholder="Título" />
+                            </div>
+                            <div>
+                                Nombre:
+                                <input name="name"
+                                    value={newAddress.name}
+                                    onChange={handleInputChange}
+                                    placeholder="Nombre" />
+                            </div>
+                            <div>
+                                Apellidos:
+                                <input name="surname"
+                                    value={newAddress.surname}
+                                    onChange={handleInputChange}
+                                    placeholder="Apellidos" />
+                            </div>
+                            <div>
+                                Telefono:
+                                <input name="phone"
+                                    value={newAddress.phone}
+                                    onChange={handleInputChange}
+                                    placeholder="Teléfono" />
+                            </div>
+                            <div>
+                                Direccion:
+                                <input name="street"
+                                    value={newAddress.street}
+                                    onChange={handleInputChange}
+                                    placeholder="Dirección" />
+                            </div>
+                            <div>
+                                Ciudad:
+                                <input name="city"
+                                    value={newAddress.city}
+                                    onChange={handleInputChange}
+                                    placeholder="Ciudad" />
+                            </div>
+                            <div>
+                                Provicia:
+                                <input name="state"
+                                    value={newAddress.state}
+                                    onChange={handleInputChange}
+                                    placeholder="Provincia" />
+                            </div>
+                            <div>
+                                Pais:
+                                <input name="country"
+                                    value={newAddress.country}
+                                    onChange={handleInputChange}
+                                    placeholder="País" />
+                            </div>
+                            <div>
+                                Codigo Postal:
+                                <input name="postalCode"
+                                    value={newAddress.postalCode}
+                                    onChange={handleInputChange}
+                                    placeholder="Código Postal" />
+                            </div>
+                            <div>
+                                <label>
+                                    Dirección predeterminada:
+                                    <input
+                                        type="checkbox"
+                                        name="isDefault"
+                                        checked={newAddress.isDefault}
+                                        onChange={handleInputChange}
+                                    />
+                                </label>
+                            </div>
+                            <div><button type="submit">Guardar</button></div>
+                        </form>
+
+                    )}</div></div>
+
                 <div className='profileOrders'><button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
                     {showInfo === 'Pedidos' && <div>PEDIDOS BLAH BLAH BLAH</div>}</div>
             </div>
