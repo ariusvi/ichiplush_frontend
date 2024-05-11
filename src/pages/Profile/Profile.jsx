@@ -8,7 +8,9 @@ import { createAddress } from '../../services/apiCalls';
 import { getDefaultAddress } from '../../services/apiCalls';
 import { getAddress } from '../../services/apiCalls';
 import { updateAddress } from '../../services/apiCalls';
-import { deleteAddress } from '../../services/apiCalls'; // Import the deleteAddress function
+import { deleteAddress } from '../../services/apiCalls'; 
+import { createOrder } from '../../services/apiCalls'; 
+
 
 
 export const Profile = () => {
@@ -142,6 +144,24 @@ export const Profile = () => {
             setTimeout(() => setMessage(''), 3000);
         }
     };
+
+    const [reference, setReference] = useState(''); 
+    const [orderMessage, setOrderMessage] = useState(''); 
+
+
+    const handleCreateOrder = async () => {
+        try {
+            const order = { reference }; 
+            await createOrder(order, token); 
+            setReference('');
+            setOrderMessage('Pedido creado con éxito.'); 
+        } catch (error) {
+            setOrderMessage('Hubo un error al crear el pedido.'); 
+        }
+        setTimeout(() => setOrderMessage(''), 3000);
+    };
+
+
 
     return (
         <>
@@ -330,8 +350,19 @@ export const Profile = () => {
 
                     )}</div></div>
 
-                <div className='profileOrders'><button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
-                    {showInfo === 'Pedidos' && <div>PEDIDOS BLAH BLAH BLAH</div>}</div>
+                <div className='profileOrders'>
+                    <button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
+                    {showInfo === 'Pedidos' && <div>PEDIDOS BLAH BLAH BLAH</div>}
+                    <p><input 
+                        type="text" 
+                        value={reference} 
+                        onChange={(e) => setReference(e.target.value)} 
+                        placeholder="Insertar referencia del pedido"
+                    />
+                    <button onClick={handleCreateOrder}>Crear pedido</button></p>
+                    {orderMessage && <p>{orderMessage}</p>}
+                                        
+                    </div>
             </div>
         </>
     );

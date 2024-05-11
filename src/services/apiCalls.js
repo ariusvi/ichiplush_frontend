@@ -256,3 +256,24 @@ export const updateAddress = async (address, token) => {
             return error
         }
     }
+
+    export const createOrder = async (order, token) => {
+            
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Baerer ${token}`
+            },
+            body: JSON.stringify(order)
+        };
+        try {
+            const response = await fetch(`${root}order/create`, options);
+            if (!response.ok) {
+                throw new Error(data.message);
+            }
+            return await response.json();
+        } catch (error) {
+            return error
+        }
+    }
