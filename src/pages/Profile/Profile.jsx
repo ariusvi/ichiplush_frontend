@@ -12,6 +12,8 @@ import { deleteAddress } from '../../services/apiCalls';
 import { createOrder } from '../../services/apiCalls';
 import { getOrders } from '../../services/apiCalls';
 import { createReview } from '../../services/apiCalls';
+import { jwtDecode } from 'jwt-decode';
+
 
 
 export const Profile = () => {
@@ -42,6 +44,10 @@ export const Profile = () => {
         throw new Error('No token provided');
     }
     const token = reduxUser.credentials.token;
+
+    const decodedToken = jwtDecode(token);
+
+    const role = decodedToken ? decodedToken.role : '';
 
     const dispatch = useDispatch();
 
@@ -214,7 +220,11 @@ export const Profile = () => {
         <>
             <div className='profileDesign'>
                 <div className='profileTitle'>Tu área</div>
+                {role === 'super_admin' && (
+                <button onClick={() => navigate('/superadmin')}>Ir a vista SuperAdmin</button>
+            )}
                 <div className='profileCenter'>
+
                     <div className='profileDirections'>
                         <button onClick={() => handleButtonClick('Direcciones')}>Dirección Principal</button>
                         {showInfo === 'Direcciones' && (
