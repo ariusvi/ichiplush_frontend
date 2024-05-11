@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { createAddress } from '../../services/apiCalls';
 import { getDefaultAddress } from '../../services/apiCalls';
 import { getAddress } from '../../services/apiCalls';
+import { updateAddress } from '../../services/apiCalls';
 
 export const Profile = () => {
 
@@ -87,6 +88,7 @@ export const Profile = () => {
     const [showAddressIndex, setShowAddressIndex] = useState(null);
     const [addresses, setAddresses] = useState([]);
 
+
     const handleShowAddresses = () => {
         if (!showAddresses) {
             getAddress(token)
@@ -95,6 +97,37 @@ export const Profile = () => {
         }
         setShowAddresses(!showAddresses);
     };
+
+    const [editingAddressIndex, setEditingAddressIndex] = useState(null);
+    const [editingAddress, setEditingAddress] = useState(null);
+
+    const handleEditAddress = (index, address) => {
+        setEditingAddressIndex(index);
+        setEditingAddress(address);
+    };
+    
+    const handleUpdateAddress = async (event) => {
+        event.preventDefault();
+        try {
+            await updateAddress(editingAddress, token);
+            const updatedAddresses = [...addresses.data];
+            updatedAddresses[editingAddressIndex] = editingAddress;
+            setAddresses({ data: updatedAddresses });
+            setEditingAddressIndex(null);
+            setEditingAddress(null);
+        } catch (error) {
+            setMessage('Hubo un error al actualizar la dirección.');
+            setTimeout(() => setMessage(''), 3000);
+        }
+    };
+
+    const handleEditingInputChange = (event) => {
+        setEditingAddress({
+            ...editingAddress,
+            [event.target.name]: event.target.value
+        });
+    };
+    
 
 
     return (
@@ -134,6 +167,23 @@ export const Profile = () => {
                             </button>
                             {showAddressIndex === index && (
                                 <div>
+                                    {editingAddressIndex === index ? (
+                                        <form onSubmit={handleUpdateAddress}>
+                                            <p>Título:<input name="title" value={editingAddress.title} onChange={handleEditingInputChange} /></p>
+                                            <p>Nombre:<input name="name" value={editingAddress.name} onChange={handleEditingInputChange} /></p>
+                                            <p>Apellidos: <input name="surname" value={editingAddress.surname} onChange={handleEditingInputChange} /></p>
+                                            <p>Teléfono: <input name="phone" value={editingAddress.phone} onChange={handleEditingInputChange} /></p>
+                                            <p>Dirección:<input name="street" value={editingAddress.street} onChange={handleEditingInputChange} /></p>
+                                            <p>Ciudad: <input name="city" value={editingAddress.city} onChange={handleEditingInputChange} /></p>
+                                            <p>Provincia: <input name="state" value={editingAddress.state} onChange={handleEditingInputChange} /></p>
+                                            <p>País: <input name="country" value={editingAddress.country} onChange={handleEditingInputChange} /></p>
+                                            <p>Código Postal: <input name="postalCode" value={editingAddress.postalCode} onChange={handleEditingInputChange} /></p>
+                                            <p>Direccion Principal:<input type="checkbox" name="isDefault" checked={editingAddress.isDefault} onChange={handleEditingInputChange} /></p>
+
+                                            <p><button type="submit">Confirmar</button></p>
+                                        </form>
+                                    ) : (
+                                        <>
                                     <p>Titulo: {address.title}</p>
                                     <p>Nombre: {address.name}</p>
                                     <p>Apellidos: {address.surname}</p>
@@ -143,6 +193,9 @@ export const Profile = () => {
                                     <p>Provicia:{address.state}</p>
                                     <p>Pais: {address.country}</p>
                                     <p>Codigo Postal: {address.postalCode}</p>
+                                    <button onClick={() => handleEditAddress(index, address)}>Editar</button>
+                                    </>
+                                    )}
                                 </div>
                             )}
                         </div>
