@@ -8,6 +8,8 @@ import { createAddress } from '../../services/apiCalls';
 import { getDefaultAddress } from '../../services/apiCalls';
 import { getAddress } from '../../services/apiCalls';
 import { updateAddress } from '../../services/apiCalls';
+import { deleteAddress } from '../../services/apiCalls'; // Import the deleteAddress function
+
 
 export const Profile = () => {
 
@@ -128,7 +130,17 @@ export const Profile = () => {
         });
     };
     
-
+    const handleDeleteAddress = async (address) => {
+        try {
+            await deleteAddress(token, address);
+            const updatedAddresses = addresses.data.filter(a => a !== address);
+            setAddresses({ data: updatedAddresses });
+        } catch (error) {
+            setMessage('Hubo un error al eliminar la dirección.');
+            console.log(error, 'error');
+            setTimeout(() => setMessage(''), 3000);
+        }
+    };
 
     return (
         <>
@@ -194,6 +206,7 @@ export const Profile = () => {
                                     <p>Pais: {address.country}</p>
                                     <p>Codigo Postal: {address.postalCode}</p>
                                     <button onClick={() => handleEditAddress(index, address)}>Editar</button>
+                                    <button onClick={() => handleDeleteAddress(address)}>Eliminar</button>
                                     </>
                                     )}
                                 </div>

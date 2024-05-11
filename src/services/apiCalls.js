@@ -229,7 +229,27 @@ export const updateAddress = async (address, token) => {
         try {
             const response = await fetch(`${root}address`, options);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(data.message);
+            }
+            return await response.json();
+        } catch (error) {
+            return error
+        }
+    }
+
+    export const deleteAddress = async (token, address) => {
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Baerer ${token}`
+            },
+            body: JSON.stringify(address)
+        };
+        try {
+            const response = await fetch(`${root}address`, options);
+            if (!response.ok) {
+                throw new Error(data.message);
             }
             return await response.json();
         } catch (error) {
