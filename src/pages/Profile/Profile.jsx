@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { updated, userData } from "../../app/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { getAddress } from '../../services/apiCalls';
 import { createAddress } from '../../services/apiCalls';
 import { getDefaultAddress } from '../../services/apiCalls';
+import { getAddress } from '../../services/apiCalls';
 
 export const Profile = () => {
 
@@ -27,8 +27,6 @@ export const Profile = () => {
         postalCode: "",
         isDefault: false
     });
-
-
 
     const [message, setMessage] = useState('');
 
@@ -63,7 +61,7 @@ export const Profile = () => {
         }
     }, [showInfo]);
 
-    console.log(addressData, "addressData");
+
 
     const handleInputChange = (event) => {
         setNewAddress({
@@ -83,6 +81,19 @@ export const Profile = () => {
             setMessage('Hubo un error al crear la dirección.');
             setTimeout(() => setMessage(''), 3000);
         }
+    };
+
+    const [showAddresses, setShowAddresses] = useState(false);
+    const [showAddressIndex, setShowAddressIndex] = useState(null);
+    const [addresses, setAddresses] = useState([]);
+
+    const handleShowAddresses = () => {
+        if (!showAddresses) {
+            getAddress(token)
+                .then(data => setAddresses(data))
+                .catch(error => console.error(error));
+        }
+        setShowAddresses(!showAddresses);
     };
 
 
@@ -110,7 +121,32 @@ export const Profile = () => {
                         )}
                         {message && <div>{message}</div>}
                     </div>
+                </div>
 
+                <div className='profileAllAddresses'>
+                    <button onClick={handleShowAddresses}>
+                        {showAddresses ? 'Ocultar direcciones' : 'Mostrar direcciones'}
+                    </button>
+                    {showAddresses && Array.isArray(addresses.data) && addresses.data.map((address, index) => (
+                        <div key={index}>
+                            <button onClick={() => setShowAddressIndex(showAddressIndex === index ? null : index)}>
+                                {address.title}
+                            </button>
+                            {showAddressIndex === index && (
+                                <div>
+                                    <p>Titulo: {address.title}</p>
+                                    <p>Nombre: {address.name}</p>
+                                    <p>Apellidos: {address.surname}</p>
+                                    <p>Telefono: {address.phone}</p>
+                                    <p>Direccion: {address.street}</p>
+                                    <p>Ciudad: {address.city}</p>
+                                    <p>Provicia:{address.state}</p>
+                                    <p>Pais: {address.country}</p>
+                                    <p>Codigo Postal: {address.postalCode}</p>
+                                </div>
+                            )}
+                        </div>
+                    ))}
                 </div>
                 <div className='profileCreateAddress'>
                     <button onClick={() => setShowForm(!showForm)}>Crear dirección</button>
