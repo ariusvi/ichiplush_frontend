@@ -8,8 +8,9 @@ import { createAddress } from '../../services/apiCalls';
 import { getDefaultAddress } from '../../services/apiCalls';
 import { getAddress } from '../../services/apiCalls';
 import { updateAddress } from '../../services/apiCalls';
-import { deleteAddress } from '../../services/apiCalls'; 
-import { createOrder } from '../../services/apiCalls'; 
+import { deleteAddress } from '../../services/apiCalls';
+import { createOrder } from '../../services/apiCalls';
+import { getOrders } from '../../services/apiCalls';
 
 
 
@@ -145,22 +146,41 @@ export const Profile = () => {
         }
     };
 
-    const [reference, setReference] = useState(''); 
-    const [orderMessage, setOrderMessage] = useState(''); 
+    const [reference, setReference] = useState('');
+    const [orderMessage, setOrderMessage] = useState('');
 
 
     const handleCreateOrder = async () => {
         try {
-            const order = { reference }; 
-            await createOrder(order, token); 
+            const order = { reference };
+            await createOrder(order, token);
             setReference('');
-            setOrderMessage('Pedido creado con éxito.'); 
+            setOrderMessage('Pedido creado con éxito.');
         } catch (error) {
-            setOrderMessage('Hubo un error al crear el pedido.'); 
+            setOrderMessage('Hubo un error al crear el pedido.');
         }
         setTimeout(() => setOrderMessage(''), 3000);
     };
 
+    const [orders, setOrders] = useState([]); 
+
+    const fetchOrders = async () => {
+        try {
+            const fetchedOrders = await getOrders(token); 
+            if (fetchedOrders && Array.isArray(fetchedOrders.data)) {
+                setOrders(fetchedOrders.data); 
+            } else {
+                console.error('Error: fetched orders is not an array');
+            }
+        } catch (error) {
+            console.error(error); 
+        }
+    };
+    
+    useEffect(() => {
+        fetchOrders(); 
+    }, []);
+    
 
 
     return (
@@ -352,17 +372,26 @@ export const Profile = () => {
 
                 <div className='profileOrders'>
                     <button onClick={() => handleButtonClick('Pedidos')}>Pedidos</button>
-                    {showInfo === 'Pedidos' && <div>PEDIDOS BLAH BLAH BLAH</div>}
-                    <p><input 
-                        type="text" 
-                        value={reference} 
-                        onChange={(e) => setReference(e.target.value)} 
+                    {showInfo === 'Pedidos' && <div>
+                    {orderMessage && <p>{orderMessage}</p>}
+                    {orders.map(order => (
+                        <div key={order.id}>
+                            <p>ID pedido: {order.id}</p>
+                            <p>Estado: {order.status}</p>
+                            
+                        </div>
+                    ))}
+                        </div>}
+                    <p><input
+                        type="text"
+                        value={reference}
+                        onChange={(e) => setReference(e.target.value)}
                         placeholder="Insertar referencia del pedido"
                     />
-                    <button onClick={handleCreateOrder}>Crear pedido</button></p>
+                        <button onClick={handleCreateOrder}>Crear pedido</button></p>
                     {orderMessage && <p>{orderMessage}</p>}
-                                        
-                    </div>
+
+                </div>
             </div>
         </>
     );

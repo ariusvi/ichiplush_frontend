@@ -277,3 +277,24 @@ export const updateAddress = async (address, token) => {
             return error
         }
     }
+
+    export const getOrders = async (token) => {
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Baerer ${token}`
+            },
+        };
+        try {
+            const response = await fetch(`${root}order`, options);
+            if (!response.ok) {
+                throw new Error(data.message);
+            }
+            const data = await response.json();
+
+            return data;
+        } catch (error) {
+            return error
+        }
+    };
