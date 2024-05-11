@@ -7,6 +7,9 @@ import { userData } from "../../app/slices/userSlice";
 
 import { getUsers } from "../../services/apiCalls";
 import { deleteUser } from "../../services/apiCalls";
+import { getReviews } from "../../services/apiCalls";
+import { getAllOrders } from "../../services/apiCalls";
+import { updateOrder } from "../../services/apiCalls";
 
 export const SuperAdmin = () => {
 
@@ -42,13 +45,15 @@ export const SuperAdmin = () => {
     const handleDeleteUser = async (userId) => {
         try {
             await deleteUser(token, userId);
-            setUsers(Users.filter(user => user.id !== userId)); // Update Users state
-            setMessage("Usuario eliminado"); // Set the message
-            setTimeout(() => setMessage(null), 3000); // Remove the message after 3 seconds
+            setUsers(Users.filter(user => user.id !== userId));
+            setMessage("Usuario eliminado");
+            setTimeout(() => setMessage(null), 3000);
         } catch (error) {
             console.log(error);
         }
     };
+
+    //--------------------USE EFFECT--------------------
 
     useEffect(() => {
         if (Users.length === 0) {
@@ -61,6 +66,71 @@ export const SuperAdmin = () => {
             navigate('/login')
         }
     }, [reduxUser]);
+
+    //--------------------REVIEWS--------------------
+    const [reviews, setReviews] = useState([]);
+
+    // if (reviews.length > 0) {
+    //     console.log(reviews, "reviews");
+    // } else {
+    //     console.log("No reviews loaded yet");
+    // }
+
+    const fetchReviews = async () => {
+        try {
+            const response = await getReviews();
+            if (response.success) {
+                setReviews(response.data);
+            } else {
+                console.log(response.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchReviews();
+    }, []);
+
+    //--------------------ORDERS--------------------
+    const [orders, setOrders] = useState([]);
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const data = await getAllOrders(token);
+                if (data.success) {
+                    setOrders(data.data);
+                } else {
+                    console.log(data.message);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchOrders();
+    }, []);
+
+    const [editingOrderId, setEditingOrderId] = useState(null);
+    const [editingOrderStatus, setEditingOrderStatus] = useState('');
+
+    const handleStatusChange = (event) => {
+        setEditingOrderStatus(event.target.value);
+    };
+
+    const handleUpdateOrder = async () => {
+        const updatedOrder = await updateOrder(token, { id: editingOrderId, status: editingOrderStatus });
+        if (updatedOrder.success) {
+            // Update the orders state with the updated order
+            setOrders(orders.map(order => order.id === editingOrderId ? { ...order, status: editingOrderStatus } : order));
+            setEditingOrderId(null);
+            setEditingOrderStatus('');
+        } else {
+            console.log(updatedOrder.message);
+        }
+    };
 
 
     return (
@@ -106,6 +176,79 @@ export const SuperAdmin = () => {
                         )}
                     </div>
                 </div>,
+
+                {/* --------------------------------- REVIEWS --------------------------- */}
+                <div className="reviewsAdmin">
+                    <div className="titleTable">REVIEWS</div>
+                    {reviews.length > 0 ? (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Review</th>
+                                    <th>Rating</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {reviews.map((review, index) => (
+                                    <tr key={index}>
+                                        <td>{review.user}</td>
+                                        <td>{review.text}</td>
+                                        <td>{review.rating}</td>
+                                        <td>{new Date(review.createdAt).toLocaleDateString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No reviews</p>
+                    )}
+                </div>
+
+                {/* --------------------------------- ORDERS --------------------------- */}
+
+                <div className="ordersAdmin">
+                    <div className="titleTable">ORDERS</div>
+                    {orders && orders.length > 0 ? (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>User</th>
+                                    <th>Budget</th>
+                                    <th>Status</th>
+                                    <th>Edit Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map((order, index) => (
+                                    <tr key={index}>
+                                        <td>{order.id}</td>
+                                        <td>{order.userId}</td>
+                                        <td>{order.budgetId}</td>
+                                        <td>
+                                            {editingOrderId === order.id ? (
+                                                <input type="text" value={editingOrderStatus} onChange={handleStatusChange} />
+                                            ) : (
+                                                order.status
+                                            )}
+                                        </td>
+                                        <td>
+                                            {editingOrderId === order.id ? (
+                                                <button onClick={handleUpdateOrder}>Save</button>
+                                            ) : (
+                                                <button onClick={() => { setEditingOrderId(order.id); setEditingOrderStatus(order.status); }}>Edit</button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No orders</p>
+                    )}
+                </div>
             </div>
         </>
     );

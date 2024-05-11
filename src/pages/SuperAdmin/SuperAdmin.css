@@ -79,3 +79,44 @@
     color: black;
     margin: 1em;
 }
+
+
+.reviewsAdmin table {
+    width: 70vw;
+    border-collapse: collapse;
+    background-color: #f2f2f2;
+}
+
+.reviewsAdmin th, .reviewsAdmin td {
+    border: 1.5px solid  black;
+    padding: 8px;
+}
+
+.reviewsAdmin th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--darkPurple);
+    color: white;
+}
+
+
+.ordersAdmin table {
+    width: 70vw;
+    border-collapse: collapse;
+    background-color: #f2f2f2;
+}
+
+.ordersAdmin th, .ordersAdmin td {
+    border: 1.5px solid  black;
+    padding: 8px;
+}
+
+.ordersAdmin th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--darkPurple);
+    color: white;
+}
+

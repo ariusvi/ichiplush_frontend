@@ -366,3 +366,51 @@ export const deleteUser = async (token, userId) => {
         return error
     }
 };
+
+export const getAllOrders = async (token) => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    };
+    try {
+        const response = await fetch(`${root}order/admin`, options);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+    } catch (error) {
+        return { success: false, message: error.message }
+    }
+};
+
+export const updateOrder = async (token, order) => {
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            id: order.id,
+            status: order.status
+        }),
+    };
+    try {
+        const response = await fetch(`${root}order/update`, options);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+    } catch (error) {
+        return { success: false, message: error.message }
+    }
+};
