@@ -107,7 +107,7 @@ export const Profile = () => {
         setEditingAddressIndex(index);
         setEditingAddress(address);
     };
-    
+
     const handleUpdateAddress = async (event) => {
         event.preventDefault();
         try {
@@ -124,12 +124,13 @@ export const Profile = () => {
     };
 
     const handleEditingInputChange = (event) => {
-        setEditingAddress({
-            ...editingAddress,
-            [event.target.name]: event.target.value
-        });
+        const { name, value, checked } = event.target;
+        setEditingAddress(prevState => ({
+            ...prevState,
+            [name]: name === 'isDefault' ? checked : value
+        }));
     };
-    
+
     const handleDeleteAddress = async (address) => {
         try {
             await deleteAddress(token, address);
@@ -181,33 +182,65 @@ export const Profile = () => {
                                 <div>
                                     {editingAddressIndex === index ? (
                                         <form onSubmit={handleUpdateAddress}>
-                                            <p>Título:<input name="title" value={editingAddress.title} onChange={handleEditingInputChange} /></p>
-                                            <p>Nombre:<input name="name" value={editingAddress.name} onChange={handleEditingInputChange} /></p>
-                                            <p>Apellidos: <input name="surname" value={editingAddress.surname} onChange={handleEditingInputChange} /></p>
-                                            <p>Teléfono: <input name="phone" value={editingAddress.phone} onChange={handleEditingInputChange} /></p>
-                                            <p>Dirección:<input name="street" value={editingAddress.street} onChange={handleEditingInputChange} /></p>
-                                            <p>Ciudad: <input name="city" value={editingAddress.city} onChange={handleEditingInputChange} /></p>
-                                            <p>Provincia: <input name="state" value={editingAddress.state} onChange={handleEditingInputChange} /></p>
-                                            <p>País: <input name="country" value={editingAddress.country} onChange={handleEditingInputChange} /></p>
-                                            <p>Código Postal: <input name="postalCode" value={editingAddress.postalCode} onChange={handleEditingInputChange} /></p>
-                                            <p>Direccion Principal:<input type="checkbox" name="isDefault" checked={editingAddress.isDefault} onChange={handleEditingInputChange} /></p>
+                                            <p>Título:<input
+                                                name="title"
+                                                value={editingAddress.title}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Nombre:<input
+                                                name="name"
+                                                value={editingAddress.name}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Apellidos: <input
+                                                name="surname"
+                                                value={editingAddress.surname}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Teléfono: <input
+                                                name="phone"
+                                                value={editingAddress.phone}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Dirección:<input
+                                                name="street"
+                                                value={editingAddress.street}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Ciudad: <input
+                                                name="city"
+                                                value={editingAddress.city}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Provincia: <input
+                                                name="state"
+                                                value={editingAddress.state}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>País: <input
+                                                name="country"
+                                                value={editingAddress.country}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Código Postal: <input
+                                                name="postalCode"
+                                                value={editingAddress.postalCode}
+                                                onChange={handleEditingInputChange} /></p>
+                                            <p>Direccion Principal:<input
+                                                type="checkbox"
+                                                name="isDefault"
+                                                checked={editingAddress.isDefault}
+                                                onChange={handleEditingInputChange}
+                                            /></p>
 
                                             <p><button type="submit">Confirmar</button></p>
                                         </form>
                                     ) : (
                                         <>
-                                    <p>Titulo: {address.title}</p>
-                                    <p>Nombre: {address.name}</p>
-                                    <p>Apellidos: {address.surname}</p>
-                                    <p>Telefono: {address.phone}</p>
-                                    <p>Direccion: {address.street}</p>
-                                    <p>Ciudad: {address.city}</p>
-                                    <p>Provicia:{address.state}</p>
-                                    <p>Pais: {address.country}</p>
-                                    <p>Codigo Postal: {address.postalCode}</p>
-                                    <button onClick={() => handleEditAddress(index, address)}>Editar</button>
-                                    <button onClick={() => handleDeleteAddress(address)}>Eliminar</button>
-                                    </>
+                                            <p>Titulo: {address.title}</p>
+                                            <p>Nombre: {address.name}</p>
+                                            <p>Apellidos: {address.surname}</p>
+                                            <p>Telefono: {address.phone}</p>
+                                            <p>Direccion: {address.street}</p>
+                                            <p>Ciudad: {address.city}</p>
+                                            <p>Provicia:{address.state}</p>
+                                            <p>Pais: {address.country}</p>
+                                            <p>Codigo Postal: {address.postalCode}</p>
+                                            <button onClick={() => handleEditAddress(index, address)}>Editar</button>
+                                            <button onClick={() => handleDeleteAddress(address)}>Eliminar</button>
+                                        </>
                                     )}
                                 </div>
                             )}
