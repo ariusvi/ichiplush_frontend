@@ -10,6 +10,7 @@ import { deleteUser } from "../../services/apiCalls";
 import { getReviews } from "../../services/apiCalls";
 import { getAllOrders } from "../../services/apiCalls";
 import { updateOrder } from "../../services/apiCalls";
+import { getItems } from "../../services/apiCalls";
 
 export const SuperAdmin = () => {
 
@@ -123,7 +124,6 @@ export const SuperAdmin = () => {
     const handleUpdateOrder = async () => {
         const updatedOrder = await updateOrder(token, { id: editingOrderId, status: editingOrderStatus });
         if (updatedOrder.success) {
-            // Update the orders state with the updated order
             setOrders(orders.map(order => order.id === editingOrderId ? { ...order, status: editingOrderStatus } : order));
             setEditingOrderId(null);
             setEditingOrderStatus('');
@@ -131,6 +131,23 @@ export const SuperAdmin = () => {
             console.log(updatedOrder.message);
         }
     };
+
+    //--------------------CATALOGUE--------------------
+    const [items, setItems] = useState([]);
+
+
+    useEffect(() => {
+        const loadItems = async () => {
+            try {
+                const data = await getItems();
+                setItems(data.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        loadItems();
+    }, []);
 
 
     return (
@@ -175,7 +192,7 @@ export const SuperAdmin = () => {
                             <p>No users</p>
                         )}
                     </div>
-                </div>,
+                </div>
 
                 {/* --------------------------------- REVIEWS --------------------------- */}
                 <div className="reviewsAdmin">
@@ -207,7 +224,6 @@ export const SuperAdmin = () => {
                 </div>
 
                 {/* --------------------------------- ORDERS --------------------------- */}
-
                 <div className="ordersAdmin">
                     <div className="titleTable">ORDERS</div>
                     {orders && orders.length > 0 ? (
@@ -247,6 +263,35 @@ export const SuperAdmin = () => {
                         </table>
                     ) : (
                         <p>No orders</p>
+                    )}
+                </div>
+
+                {/* --------------------------------- CATALOGUE --------------------------- */}
+                <div className="catalogueAdmin">
+                    <div className="titleTable">CATALOGUE</div>
+                    {items && items.length > 0 ? (
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>URL image</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {items.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.title}</td>
+                                        <td>{item.description}</td>
+                                        <td>{item.image}</td>
+
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>No items</p>
                     )}
                 </div>
             </div>

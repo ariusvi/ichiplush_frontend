@@ -2,7 +2,7 @@
 
 .superadminDesign{
     min-height: 83.7vh;
-    min-width: 99.1vw;
+    min-width: 97.4vw;
     max-width: 100%;
 
     overflow: hidden;
@@ -13,13 +13,16 @@
     align-items: center;
     background-color:aliceblue;
 
+    padding: 1em;
+
 }
 
 .adminTitle{
     font-size: 3em;
     font-weight: bold;
     color:black;
-    margin: 1em;
+
+    padding: 1em;
 }
 
 .adminCenter{
@@ -118,5 +121,28 @@
     text-align: left;
     background-color: var(--darkPurple);
     color: white;
+    
 }
+
+
+.catalogueAdmin table {
+    width: 70vw;
+    border-collapse: collapse;
+    background-color: #f2f2f2;
+}
+
+.catalogueAdmin th, .catalogueAdmin td {
+    border: 1.5px solid  black;
+    padding: 8px;
+}
+
+.catalogueAdmin th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--darkPurple);
+    color: white;
+    
+}
+
 
