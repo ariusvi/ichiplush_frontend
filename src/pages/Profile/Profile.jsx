@@ -60,17 +60,22 @@ export const Profile = () => {
     const handleButtonClick = async (infoType) => {
         setShowInfo(infoType);
         if (infoType === 'Direcciones') {
-            const fetchedAddressData = await getAddressData(token);
+            const fetchedAddressData = await setAddressData(token);
             if (fetchedAddressData && fetchedAddressData.length > 0) {
                 setAddressData(fetchedAddressData);
             } else {
                 setAddressData('No hay datos');
             }
         } else if (infoType === 'Pedidos') {
-            const fetchedOrders = await getOrders(token);
-            if (fetchedOrders && fetchedOrders.length > 0) {
-                setOrders(fetchedOrders);
-            } else {
+            try {
+                const data = await getOrders(token);
+                if (data && data.data && data.data.length > 0) {
+                    setOrders(data.data);
+                } else {
+                    setOrders('No hay datos');
+                }
+            } catch (error) {
+                console.error(error);
                 setOrders('No hay datos');
             }
         }
@@ -178,7 +183,26 @@ export const Profile = () => {
         setTimeout(() => setOrderMessage(''), 3000);
     };
 
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState(null);
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const data = await getOrders(token);
+
+                setOrders(data.data);
+            } catch (error) {
+                console.error("Failed to fetch orders:", error);
+
+                setOrders([]);
+            }
+        };
+
+        fetchOrders();
+    }, [token]);
+
+
+
 
     const fetchOrders = async () => {
         try {
@@ -221,8 +245,8 @@ export const Profile = () => {
             <div className='profileDesign'>
                 <div className='profileTitle'>Tu área</div>
                 {role === 'super_admin' && (
-                <button onClick={() => navigate('/superadmin')}>Ir a vista SuperAdmin</button>
-            )}
+                    <button onClick={() => navigate('/superadmin')}>Ir a vista SuperAdmin</button>
+                )}
                 <div className='profileCenter'>
 
                     <div className='profileDirections'>
@@ -416,7 +440,7 @@ export const Profile = () => {
                         typeof orders === 'string' ? <p>{orders}</p> :
                             <div>
                                 {orderMessage && <p>{orderMessage}</p>}
-                                {orders.map(order => (
+                                {orders && orders.map(order => (
                                     <div key={order.id}>
                                         <p>ID pedido: {order.id}</p>
                                         <p>Estado: {order.status}</p>

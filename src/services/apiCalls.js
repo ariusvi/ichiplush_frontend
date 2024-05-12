@@ -151,7 +151,7 @@ export const getAddress = async (token) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Baerer ${token}`
+            "Authorization": `Bearer ${token}`
         },
     };
 
@@ -283,19 +283,20 @@ export const getOrders = async (token) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Baerer ${token}`
+            "Authorization": `Bearer ${token}`
         },
     };
     try {
         const response = await fetch(`${root}order`, options);
         if (!response.ok) {
+            const data = await response.json();
             throw new Error(data.message);
         }
         const data = await response.json();
-
+    
         return data;
     } catch (error) {
-        return error
+        throw error;
     }
 };
 
